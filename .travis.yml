@@ -16,3 +16,9 @@ after_success:
   - docker build -t rehan/multi-worker ./worker
   - docker build -t rehan/multi-nginx ./nginx
 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push rehan/multi-client
+  - docker push rehan/multi-server
+  - docker push rehan/multi-worker
+  - docker push rehan/mult-nginx
