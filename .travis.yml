@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -f ./client/Dockerfile.dev -t rehan/client ./client
+  - docker build -f ./client/Dockerfile.dev -t rehanslife/client ./client
 
 script:
-  - docker run -e CI=true rehan/client npm run test -- --coverage
+  - docker run -e CI=true rehanslife/client npm run test -- --coverage
 
 after_success:
-  - docker build -t rehan/multi-client ./client
-  - docker build -t rehan/multi-server ./server
-  - docker build -t rehan/multi-worker ./worker
-  - docker build -t rehan/multi-nginx ./nginx
+  - docker build -t rehanslife/multi-client ./client
+  - docker build -t rehanslife/multi-server ./server
+  - docker build -t rehanslife/multi-worker ./worker
+  - docker build -t rehanslife/multi-nginx ./nginx
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push rehan/multi-client
-  - docker push rehan/multi-server
-  - docker push rehan/multi-worker
-  - docker push rehan/mult-nginx
+  - docker push rehanslife/multi-client
+  - docker push rehanslife/multi-server
+  - docker push rehanslife/multi-worker
+  - docker push rehanslife/mult-nginx
