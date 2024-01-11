@@ -21,4 +21,4 @@ after_success:
   - docker push rehanslife/multi-client
   - docker push rehanslife/multi-server
   - docker push rehanslife/multi-worker
-  - docker push rehanslife/mult-nginx
+  - docker push rehanslife/multi-nginx
