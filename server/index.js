@@ -14,7 +14,7 @@ app.use(cors());
 
 
 const pgClient = new Pool({
-    user: keys.pgUser,
+    user:  keys.pgUser,
     host: keys.pgHost,
     database: keys.pgDatabase,
     port: keys.pgPort,
