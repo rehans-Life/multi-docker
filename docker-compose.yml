@@ -3,7 +3,6 @@ version: '3'
 services:
   client:
     image: "rehanslife/multi-client"
-    hostname: client
     mem_limit: 128m
   server:
     image: "rehanslife/multi-server"
