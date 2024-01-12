@@ -12,13 +12,14 @@ const port = 4000;
 app.use(express.json());
 app.use(cors());
 
+
 const pgClient = new Pool({
     user: keys.pgUser,
     host: keys.pgHost,
     database: keys.pgDatabase,
     port: keys.pgPort,
     password: keys.pgPasword,
-    ssl: env !== 'production' ? false : { rejectUnauthorized: true }
+    ssl: env !== 'production' ? false : { rejectUnauthorized: false }
 });
 
 pgClient.on('error', () => console.log('Lost PG connection'));
