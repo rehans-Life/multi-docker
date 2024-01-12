@@ -18,7 +18,7 @@ const pgClient = new Pool({
     host: keys.pgHost,
     database: keys.pgDatabase,
     port: keys.pgPort,
-    password: keys.pgPasword,
+    password: keys.pgPassword,
     ssl: env !== 'production' ? false : { rejectUnauthorized: false }
 });
 
@@ -77,11 +77,6 @@ app.post('/values', async (req, res) => {
         app.listen(port , () => console.log(`Server listening on port ${port}`));    
     } catch (err) {
         console.log(err);
-
-        await pgClient.end();
-        await redisClient.disconnect();
-        await redisPublisher.disconnect();
-
         process.exit(1);
     }
 })()
