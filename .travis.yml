@@ -23,6 +23,8 @@ after_success:
   - docker push rehanslife/multi-worker
   - docker push rehanslife/multi-nginx
 
+  - docker logout
+
 deploy:
   provider: elasticbeanstalk
   region: "me-south-1"
@@ -30,9 +32,7 @@ deploy:
   env: "Multi-container-env"
   bucket_name: "elasticbeanstalk-me-south-1-485298220100"
   bucket_path: "multi-docker"
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
   on:
     branch: master
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
-  
