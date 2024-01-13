@@ -74,11 +74,11 @@ app.post('/values', async (req, res) => {
 
 (async () => {
     try {
-        // await pgClient.connect();
-        // await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
+        await pgClient.connect();
+        await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
 
-        // await redisClient.connect();
-        // await redisPublisher.connect();
+        await redisClient.connect();
+        await redisPublisher.connect();
     
         app.listen(port, "127.0.0.1" , () => console.log(`Server listening on port ${port}`));    
     } catch (err) {
