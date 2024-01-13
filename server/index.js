@@ -13,16 +13,11 @@ app.use(express.json());
 app.use(cors());
 
 let pgClient = new Pool({
-    user: "postgres",
-    // keys.pgUser,
-    host: "multi-docker-postgres.cnguos0e45m3.me-south-1.rds.amazonaws.com",
-    // keys.pgHost,
-    database: "multi_postgres",
-    // keys.pgDatabase,
-    port: 5432,
-    // keys.pgPort,
-    password: "rehan_password",
-    // keys.pgPassword,
+    user: keys.pgUser,
+    host: keys.pgHost,
+    database: keys.pgDatabase,
+    port: keys.pgPort,
+    password: keys.pgPassword,
     ssl: env !== 'production' ? false : { rejectUnauthorized: false }
 });
 
@@ -30,10 +25,8 @@ pgClient.on('error', () => console.log('Lost PG connection'));
 
 const redisClient = createClient({
     socket: {
-        host: "multi-docker-redis-wqdyoa.serverless.mes1.cache.amazonaws.com",
-        // keys.redisHost,
-        port: 6379,
-        //  keys.redisPort,
+        host: keys.redisHost,
+        port: keys.redisPort,
         reconnectStrategy: () => 1000
     },
 });
