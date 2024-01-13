@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-  # postgres:
-  #   restart: always
-  #   image: postgres
-  #   environment:
-  #     - POSTGRES_PASSWORD=postgres_password
-  # redis-server:
-  #   restart: always
-  #   image: redis
-
   client:
     image: "rehanslife/multi-client"
     mem_limit: 128m
@@ -20,14 +11,6 @@ services:
     image: "rehanslife/multi-server"
     hostname: api
     mem_limit: 128m
-    # environment:
-    #   - REDIS_HOST=redis-server
-    #   - REDIS_PORT=6379
-    #   - PGUSER=postgres 
-    #   - PGHOST=postgres
-    #   - PGDATABASE=postgres
-    #   - PGPASSWORD=postgres_password
-    #   - PGPORT=5432
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
@@ -41,13 +24,14 @@ services:
     restart: always
     image: "rehanslife/multi-worker"
     mem_limit: 128m
-    # environment:
-    #   - REDIS_HOST=redis-server
-    #   - REDIS_PORT=6379
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
+
   nginx:
+    depends_on:
+      - server
+      - client
     restart: always
     image: 'rehanslife/multi-nginx'
     ports:

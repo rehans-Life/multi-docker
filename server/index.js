@@ -13,16 +13,17 @@ app.use(express.json());
 app.use(cors());
 
 
-let pgClient = new Pool({
-    user: keys.pgUser,
-    host: keys.pgHost,
-    database: keys.pgDatabase,
-    port: keys.pgPort,
-    password: keys.pgPassword,
-    // ssl: env !== 'production' ? false : { rejectUnauthorized: false }
-});
+let pgClient;
+// new Pool({
+//     user: keys.pgUser,
+//     host: keys.pgHost,
+//     database: keys.pgDatabase,
+//     port: keys.pgPort,
+//     password: keys.pgPassword,
+//     ssl: env !== 'production' ? false : { rejectUnauthorized: false }
+// });
 
-pgClient.on('error', () => console.log('Lost PG connection'));
+// pgClient.on('error', () => console.log('Lost PG connection'));
 
 const redisClient = createClient({
     socket: {
@@ -69,13 +70,13 @@ app.post('/values', async (req, res) => {
 
 (async () => {
     try {
-        await pgClient.connect();
-        await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
+        // await pgClient.connect();
+        // await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
 
         await redisClient.connect();
         await redisPublisher.connect();
     
-        app.listen(port , "127.0.0.1" ,() => console.log(`Server listening on port ${port}`));    
+        app.listen(port ,() => console.log(`Server listening on port ${port}`));    
     } catch (err) {
         console.log(err);
         process.exit(1);
