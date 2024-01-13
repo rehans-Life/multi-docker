@@ -9,6 +9,8 @@ const env = process.env.NODE_ENV;
 const app = express();
 const port = 4000;
 
+console.log(keys);
+
 app.use(express.json());
 app.use(cors());
 
