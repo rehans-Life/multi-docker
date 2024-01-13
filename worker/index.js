@@ -33,10 +33,6 @@ function fibonacci(index) {
         await sub.connect();    
     } catch (err) {
         console.log(err);
-
-        await sub.disconnect();
-        await redisClient.disconnect();
-
         process.exit(1);
     }
 })();
