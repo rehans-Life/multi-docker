@@ -4,6 +4,7 @@ services:
   client:
     image: "rehanslife/multi-client"
     mem_limit: 128m
+    hostname: client
   server:
     image: "rehanslife/multi-server"
     hostname: api
@@ -23,6 +24,7 @@ services:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
+    restart: always
     image: 'rehanslife/multi-nginx'
     ports:
       - '80:80'
