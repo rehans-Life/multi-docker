@@ -13,11 +13,16 @@ app.use(express.json());
 app.use(cors());
 
 let pgClient = new Pool({
-    user: keys.pgUser,
-    host: keys.pgHost,
-    database: keys.pgDatabase,
-    port: keys.pgPort,
-    password: keys.pgPassword,
+    user: "postgres",
+    // keys.pgUser,
+    host: "multi-docker-postgres.cnguos0e45m3.me-south-1.rds.amazonaws.com",
+    // keys.pgHost,
+    database: "multi_postgres",
+    // keys.pgDatabase,
+    port: 5432,
+    // keys.pgPort,
+    password: "rehan_password",
+    // keys.pgPassword,
     ssl: env !== 'production' ? false : { rejectUnauthorized: false }
 });
 
@@ -25,9 +30,10 @@ pgClient.on('error', () => console.log('Lost PG connection'));
 
 const redisClient = createClient({
     socket: {
-        host: keys.redisHost,
-        port: keys.redisPort,
-        connectTimeout: 20000,
+        host: "multi-docker-redis-wqdyoa.serverless.mes1.cache.amazonaws.com",
+        // keys.redisHost,
+        port: 6379,
+        //  keys.redisPort,
         reconnectStrategy: () => 1000
     },
 });
@@ -68,8 +74,8 @@ app.post('/values', async (req, res) => {
 
 (async () => {
     try {
-        await pgClient.connect();
-        await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
+        // await pgClient.connect();
+        // await pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)');
 
         await redisClient.connect();
         await redisPublisher.connect();
