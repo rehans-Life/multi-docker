@@ -7,7 +7,6 @@ services:
     hostname: client
 
   server:
-    restart: always
     image: "rehanslife/multi-server"
     hostname: api
     mem_limit: 128m
@@ -21,7 +20,6 @@ services:
       - PGPORT=$PGPORT
 
   worker:
-    restart: always
     image: "rehanslife/multi-worker"
     mem_limit: 128m
     environment:
