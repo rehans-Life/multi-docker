@@ -44,14 +44,14 @@ app.get('/values/all', async (req, res) => {
 
 app.get('/values/current', async (req, res) => {
     const values = await redisClient.hGetAll('values');
-    res.status(200).send(values);
+    res.status(200).json(values);
 });
 
 app.post('/values', async (req, res) => {
     const index = req.body.index;
 
     if(index > 40) {
-        res.send(422).send({error: "Index too high"});
+        res.send(422).json({error: "Index too high"});
         return;
     }  
 
@@ -60,7 +60,7 @@ app.post('/values', async (req, res) => {
 
     await pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
 
-    res.status(200).send({
+    res.status(200).json({
         working: true,
     })
 });
