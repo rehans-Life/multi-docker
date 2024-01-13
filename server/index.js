@@ -9,10 +9,8 @@ const env = process.env.NODE_ENV;
 const app = express();
 const port = 4000;
 
-
 app.use(express.json());
 app.use(cors());
-
 
 let pgClient = new Pool({
     user: keys.pgUser,
@@ -76,7 +74,7 @@ app.post('/values', async (req, res) => {
         await redisClient.connect();
         await redisPublisher.connect();
     
-        app.listen(port ,() => console.log(`Server listening on port ${port}`));    
+        app.listen(port, "127.0.0.1" , () => console.log(`Server listening on port ${port}`));    
     } catch (err) {
         console.log(err);
         process.exit(1);
