@@ -73,7 +73,7 @@ app.post('/values', async (req, res) => {
         await redisClient.connect();
         await redisPublisher.connect();
     
-        app.listen(port, "127.0.0.1" , () => console.log(`Server listening on port ${port}`));    
+        app.listen(port , () => console.log(`Server listening on port ${port}`));    
     } catch (err) {
         console.log(err);
         process.exit(1);
