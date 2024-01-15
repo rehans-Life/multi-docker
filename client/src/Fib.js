@@ -53,7 +53,7 @@ export default function Fib() {
             <h3>Indexes I have seen:</h3>
             <div>
                 {
-                    seenIndexes.map(({ number }, index) => 
+                    seenIndexes?.map(({ number }, index) => 
                         <span key={index}>{number},</span>
                     )
                 }
