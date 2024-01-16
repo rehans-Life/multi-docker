@@ -1,8 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postges-deployment
+  name: postgres-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
       component: postgres
@@ -11,11 +12,23 @@ spec:
       labels:
         component: postgres
     spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: database-presistent-volume-claim
       containers:
       - name: postges
         image: postgres
-        # env:
-          # - name: 
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            subPath: postgres
+            name: postgres-storage
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgpassword
+                key: PGPASSWORD
         resources:
           limits:
             memory: "128Mi"

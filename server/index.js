@@ -17,8 +17,7 @@ let pgClient = new Pool({
     host: keys.pgHost,
     database: keys.pgDatabase,
     port: keys.pgPort,
-    password: keys.pgPassword,
-    ssl: env !== 'production' ? false : { rejectUnauthorized: false }
+    password: keys.pgPassword
 });
 
 pgClient.on('error', () => console.log('Lost PG connection'));
