@@ -19,26 +19,27 @@ before_install:
   # Installing google cloud sdk
   - if [ ! -d $HOME/google-cloud-sdk/bin ]; then
       rm -rf $HOME/google-cloud-sdk;
-      curl https://sdk.cloud.google.com | bash;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
+      curl https://sdk.cloud.google.com | bash > bin/null;
     fi
   - source $HOME/google-cloud-sdk/path.bash.inc
   
   # Installing kubectl to manipulate the kubenetes clusters running
   - gcloud components update kubectl
 
-  # selecting the project
-  - glcoud config set project multi-k8s-411607
-
   # Adding the service account to our gcloud service which has permissions 
   # to manipulate the kubernetes clusters running in our project
   - gcloud auth activate-service-account --key-file multi-k8s-411607-db3de3ca2b02.json
 
-  # Add the cluster we want to manipulate
-  - gcloud container clusters get-credentials multi-cluster
+  # selecting the project
+  - glcoud config set project multi-k8s-411607
 
   # Add the region of where the cluster is running
   - glcoud config set compute/zone me-west1-a
-  
+
+  # Add the cluster we want to manipulate
+  - gcloud container clusters get-credentials multi-cluster
+
   # Building the client image to test
   - docker build -f Dockerfile.dev -t rehanslife/client ./client
 
