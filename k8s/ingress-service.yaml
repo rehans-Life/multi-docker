@@ -26,3 +26,4 @@ spec:
             name: server-cluster-ip-service
             port: 
               number: 4000
+

@@ -3,10 +3,50 @@ sudo: required
 services:
   - docker
 
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 before_install: 
   # Getting back the encrypted file from travis yaml
   - openssl aes-256-cbc -K $encrypted_1c0fb2e058e0_key -iv $encrypted_1c0fb2e058e0_iv -in multi-k8s-411607-db3de3ca2b02.json.enc -out multi-k8s-411607-db3de3ca2b02.json -d
-  - curl https://sdk.cloud.google.com | bash > /dev/null;
+
+  # Installing google cloud sdk
+  - if [ ! -d $HOME/google-cloud-sdk/bin ]; then
+    rm -rf $HOME/google-cloud-sdk;
+    curl https://sdk.cloud.google.com | bash > /dev/null;
+    fi
   - source $HOME/google-cloud-sdk/path.bash.inc
+
+  # Installing kubectl to manipulate the kubenetes clusters running
   - gcloud components update kubectl
+
+  # selecting the project
+  - glcoud config set project multi-k8s-411607
+
+  # Adding the service account to our gcloud service which has permissions 
+  # to manipulate the kubernetes clusters running in our project
   - gcloud auth activate-service-account --key-file multi-k8s-411607-db3de3ca2b02.json
+
+  # Add the cluster we want to manipulate
+  - gcloud container clusters get-credentials multi-cluster
+
+  # Add the region of where the cluster is running
+  - glcoud config set compute/zone me-west1-a
+  
+  # Building the client image to test
+  - docker build -f Dockerfile.dev -t rehanslife/client ./client
+
+script: 
+  # Running tests
+  - docker run -e CI=true rehanslife/client npm run test -- --coverage
+
+
+deploy:
+  # Custom provider to deploy to our server
+  provider: script
+  # File to run
+  script: bash ./deploy.sh
+  on:
+    branch: complex
