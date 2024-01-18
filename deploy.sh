@@ -1,6 +1,6 @@
-docker build -t rehanslife/multi-client:latest -t rehanslife/multi-client:$SHA ./client
-docker build -t rehanslife/multi-server:latest -t rehanslife/multi-server:$SHA ./server
-docker build -t rehanslife/multi-worker:latest -t rehanslife/multi-worker:$SHA ./worker
+docker build -t rehanslife/multi-client:latest -t rehanslife/multi-client:$SHA -f ./client/Dockerfile ./client
+docker build -t rehanslife/multi-server:latest -t rehanslife/multi-server:$SHA -f ./server/Dockerfile ./server
+docker build -t rehanslife/multi-worker:latest -t rehanslife/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
