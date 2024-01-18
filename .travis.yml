@@ -13,10 +13,7 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_1c0fb2e058e0_key -iv $encrypted_1c0fb2e058e0_iv -in multi-k8s-411607-db3de3ca2b02.json.enc -out multi-k8s-411607-db3de3ca2b02.json -d
 
   # Installing google cloud sdk
-  - if [ ! -d $HOME/google-cloud-sdk/bin ]; then
-      rm -rf $HOME/google-cloud-sdk;
-      curl https://sdk.cloud.google.com | bash > /dev/null;
-    fi
+  - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
 
   # Installing kubectl to manipulate the kubenetes clusters running
