@@ -33,7 +33,7 @@ before_install:
   - gcloud container clusters get-credentials multi-cluster
 
   # Building the client image to test
-  - docker build -f Dockerfile.dev -t rehanslife/client ./client
+  - docker build -f ./client/Dockerfile.dev -t rehanslife/client ./client
 
 script: 
   # Running tests
