@@ -26,10 +26,10 @@ before_install:
   - gcloud auth activate-service-account --key-file multi-k8s-411607-db3de3ca2b02.json
 
   # selecting the project
-  - glcoud config set project multi-k8s-411607
+  - gcloud config set project multi-k8s-411607
 
   # Add the region of where the cluster is running
-  - glcoud config set compute/zone me-west1-a
+  - gcloud config set compute/zone me-west1-a
 
   # Add the cluster we want to manipulate
   - gcloud container clusters get-credentials multi-cluster
