@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: rehanslife/client
+        image: rehanslife/multi-client
         resources:
           limits:
             memory: "128Mi"
