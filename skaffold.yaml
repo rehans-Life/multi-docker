@@ -1,0 +1,40 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+deploy:
+  kubectl:
+    remoteManifests:
+      - "./k8s/client-deployment"
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rehanslife/multi-client
+      context: ./client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.js"
+          - dest: .
+            src: "src/**/*.css"
+          - dest: .
+            src: "src/**/*.html"
+          - dest: .
+            src: public
+    # - image: rehanslife/multi-server
+    #   context: ./server
+    #   docker:
+    #     dockerfile: Dockerfile.dev
+    #   sync:
+    #     manual:
+    #       - dest: .
+    #         src: "*.js"
+    # - image: rehanslife/multi-worker
+    #   context: ./worker
+    #   docker:
+    #     dockerfile: Dockerfile.dev
+    #   sync:
+    #     manual:
+    #       - dest: .
+    #         src: "*.js"
