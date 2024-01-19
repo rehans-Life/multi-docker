@@ -29,10 +29,10 @@ before_install:
   - gcloud config set project multi-k8s-411607
 
   # Add the region of where the cluster is running
-  - gcloud config set compute/zone me-west1
+  - gcloud config set compute/zone me-west1-a
 
   # Add the cluster we want to manipulate
-  - gcloud container clusters get-credentials multi-cluster
+  - gcloud container clusters get-credentials multi-cluster-1
 
   # Building the client image to test
   - docker build -f ./client/Dockerfile.dev -t rehanslife/client ./client
