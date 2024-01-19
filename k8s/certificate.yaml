@@ -6,6 +6,7 @@ spec:
   secretName: defidigital-site-tls
   issuerRef:
     name: letsencrypt-prod
+    kind: ClusterIssuer
   commonName: defidigital.site
   dnsNames:
     - www.defidigital.site

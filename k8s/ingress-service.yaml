@@ -13,8 +13,8 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - www.defidigital.site
-      - defidigital.site
+        - www.defidigital.site
+        - defidigital.site
       secretName: defidigital-site-tls
   rules:
     - host: defidigital.site
