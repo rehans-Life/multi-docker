@@ -29,7 +29,7 @@ before_install:
   - gcloud config set project multi-k8s-411607
 
   # Add the region of where the cluster is running
-  - gcloud config set compute/zone me-west1-a
+  - gcloud config set compute/zone me-west1
 
   # Add the cluster we want to manipulate
   - gcloud container clusters get-credentials multi-cluster
