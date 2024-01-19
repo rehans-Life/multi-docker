@@ -17,8 +17,8 @@ spec:
         image: rehanslife/multi-client
         resources:
           requests:
-            memory: "24Mi"
-            cpu: "10m"
+            memory: "68Mi"
+            cpu: "100m"
           limits:
             memory: "128Mi"
             cpu: "100m"
