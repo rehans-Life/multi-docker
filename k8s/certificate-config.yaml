@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: defidigital-site
+spec:
+  secretName: defigital-site-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: defidigital.site
+  dnsNames:
+    - www.defigital.site
+    - defigital.site
